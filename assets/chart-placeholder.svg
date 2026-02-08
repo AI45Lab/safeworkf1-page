@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 600 300">
+  <rect width="600" height="300" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1" rx="6"/>
+  <text x="300" y="145" text-anchor="middle" fill="#57606a" font-family="sans-serif" font-size="14">Replace with your chart (e.g. export from TikZ or paste Pandoc output)</text>
+</svg>

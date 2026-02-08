@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications | SafeWork</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/publications.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="site-header__logo">SafeWork</a>
+      <nav class="site-header__nav" aria-label="Main">
+        <a href="publications.html" class="site-header__nav-link site-header__nav-link--active">Publications</a>
+        <a href="index.html#updates" class="site-header__nav-link">Updates</a>
+        <a href="contact.html" class="site-header__nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="publications-page">
+    <div class="publications-page__inner">
+      <header class="publications-header">
+        <h1 class="publications-header__title animate-in">Publications</h1>
+        <p class="publications-header__lead animate-in animate-in--delay-1">
+          Framework documents and reports we've released. PDFs open in a new tab.
+        </p>
+      </header>
+
+      <ul class="publications-list">
+        <li class="publications-list__item animate-on-scroll" style="--i: 0">
+          <div class="publications-list__meta">
+            <span class="publications-list__type">Web report</span>
+            <span class="publications-list__version">F1.5</span>
+            <time class="publications-list__date" datetime="2026-02-08">February 8, 2026</time>
+          </div>
+          <h2 class="publications-list__title">
+            <a href="report.html">Safety Report — F1.5</a>
+          </h2>
+          <p class="publications-list__desc">
+            Safety evaluation and front-risk assessment, methodology, findings with interactive charts and LLM evaluation table, and recommendations for deployment.
+          </p>
+        </li>
+        <li class="publications-list__item animate-on-scroll" style="--i: 1">
+          <div class="publications-list__meta">
+            <span class="publications-list__type">PDF</span>
+            <time class="publications-list__date" datetime="2025-07">July 2025</time>
+          </div>
+          <h2 class="publications-list__title">
+            <a href="https://research.ai45.shlab.org.cn/safework-f1-framework.pdf" target="_blank" rel="noopener">Frontier AI Risk Management Framework</a>
+          </h2>
+          <p class="publications-list__desc">
+            The framework document: risk identification, thresholds, analysis, evaluation, mitigation, and governance for frontier AI.
+          </p>
+        </li>
+        <li class="publications-list__item animate-on-scroll" style="--i: 2">
+          <div class="publications-list__meta">
+            <span class="publications-list__type">PDF</span>
+            <span class="publications-list__version">F1.0</span>
+            <time class="publications-list__date" datetime="2025-07">July 2025</time>
+          </div>
+          <h2 class="publications-list__title">
+            <a href="https://arxiv.org/pdf/2507.16534" target="_blank" rel="noopener">Frontier AI Risk Management Framework in Practice: A Risk Analysis Technical Report</a>
+          </h2>
+          <p class="publications-list__desc">
+            Technical report applying the framework: risk analysis methodology and evaluation in practice.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="publications-footer">
+    <div class="publications-footer__inner">
+      <div class="publications-footer__top">
+        <a href="index.html" class="publications-footer__logo">SafeWork</a>
+        <nav class="publications-footer__nav" aria-label="Footer">
+          <a href="publications.html">Publications</a>
+          <a href="index.html#updates">Updates</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <p class="publications-footer__copy">Structured risk assessment for frontier AI systems. <span class="publications-footer__version">F1.5</span></p>
+    </div>
+  </footer>
+
+  <script src="js/home.js"></script>
+</body>
+</html>

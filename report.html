@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safety Report | SafeWork F1.5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button type="button" class="toc-toggle" aria-label="Toggle table of contents" aria-expanded="true">
+        <svg class="toc-toggle__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+        </svg>
+      </button>
+      <a href="index.html" class="site-header__logo">SafeWork</a>
+    </div>
+  </header>
+
+  <div class="page-layout" id="page-layout">
+    <aside class="toc animate-on-scroll" aria-label="On this page">
+      <nav class="toc__nav">
+        <p class="toc__title">On this page</p>
+        <ul class="toc__list">
+          <li><a href="#executive-summary">Executive Summary</a></li>
+          <li><a href="#methodology">Methodology</a></li>
+          <li><a href="#risk-framework">Risk Framework</a></li>
+          <li><a href="#front-risk-report">Front Risk Report</a></li>
+          <li><a href="#findings">Findings</a></li>
+          <li><a href="#llm-evaluation">Experiments</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+  <article class="article">
+    <header class="article__header animate-in">
+      <div class="article__meta">
+        <time class="article__date">February 8, 2026</time>
+        <nav class="article__breadcrumb" aria-label="Categories">
+          <a href="index.html">SafeWork</a>
+          <a href="index.html#updates">Releases</a>
+        </nav>
+      </div>
+      <h1 class="article__title">Safety Report — F1.5</h1>
+      <p class="article__lead">
+        SafeWork F1.5 evaluates more recent models and benchmarks than F1.0. This report covers safety evaluation and front-risk assessment,
+        model behavior under adversarial conditions, and recommendations for deployment.
+      </p>
+      <p class="article__cta">
+        <a href="https://research.ai45.shlab.org.cn/safework-f1-framework.pdf" class="article__cta-link">Frontier AI Risk Management Framework</a> (July 2025, PDF)
+        <span class="article__cta-sep" aria-hidden="true"> · </span>
+        <a href="https://arxiv.org/pdf/2507.16534" class="article__cta-link">Frontier AI Risk Management Framework in Practice: A Risk Analysis Technical Report</a> (July 2025, F1.0, PDF)
+      </p>
+    </header>
+
+    <div class="article__body">
+      <section id="executive-summary" class="article__section animate-on-scroll">
+        <h2>Executive Summary</h2>
+        <p>
+          This report presents the safety evaluation of SafeWork (Frontier Risk Management Framework),
+          including assessment of front-risk factors, model behavior under adversarial and
+          out-of-distribution conditions, and recommendations for deployment. The evaluation
+          follows a structured risk framework and standardized benchmarks.
+        </p>
+        <p>
+          Key findings indicate areas of strength in robustness and alignment, with identified
+          front-risk categories requiring continued monitoring. Detailed methodology and
+          results are provided in the following sections.
+        </p>
+      </section>
+
+      <section id="methodology" class="article__section animate-on-scroll">
+        <h2>Methodology</h2>
+        <p>
+          We adopt a multi-stage evaluation pipeline: (1) red-teaming and adversarial prompts,
+          (2) out-of-distribution and edge-case testing, (3) human preference and safety
+          alignment evaluation, and (4) quantitative metrics on standardized benchmarks.
+        </p>
+        <h3>Evaluation Datasets</h3>
+        <p>
+          Benchmarks include safety-oriented subsets (e.g., harmful instruction following,
+          jailbreak resistance) and general capability suites to avoid capability–safety
+          trade-off blind spots. All evaluations are run under fixed random seeds for
+          reproducibility.
+        </p>
+        <h3>Metrics</h3>
+        <p>
+          Primary metrics are refusal rate on harmful prompts, consistency of safe behavior
+          across paraphrases, and score on standardized safety benchmarks. Secondary metrics
+          include latency and resource use under load.
+        </p>
+      </section>
+
+      <section id="risk-framework" class="article__section animate-on-scroll">
+        <h2>Risk Framework</h2>
+        <p>
+          Risks are categorized by likelihood and impact. We use a four-level severity scale
+          (Low, Medium, High, Critical) and a three-level likelihood scale (Rare, Possible,
+          Likely). Front-risk is defined as the set of risks that are both high-impact and
+          non-negligible likelihood, or that appear at the "front" of user-facing interactions.
+        </p>
+        <div class="article__table-wrap">
+          <table class="sortable" data-sortable>
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Low</td><td>Minor misuse or confusion; limited scope.</td></tr>
+              <tr><td>Medium</td><td>Moderate harm possible in specific contexts.</td></tr>
+              <tr><td>High</td><td>Serious harm; requires mitigation.</td></tr>
+              <tr><td>Critical</td><td>Unacceptable risk; must be addressed before release.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="front-risk-report" class="article__section animate-on-scroll">
+        <h2>Front Risk Report</h2>
+        <p>
+          Front risk refers to risks that manifest in the primary user-facing behavior of the
+          system—i.e., the first response or the most visible failure modes. This section
+          summarizes the front-risk assessment for the framework.
+        </p>
+        <h3>Identified Front-Risk Categories</h3>
+work        <ul>
+          <li><strong>Harmful instruction compliance:</strong> Model response to explicitly harmful or illegal requests.</li>
+          <li><strong>Jailbreak and bypass:</strong> Susceptibility to prompt engineering that circumvents safety guidelines.</li>
+          <li><strong>Misinformation and consistency:</strong> Contradictory or false claims in sensitive domains.</li>
+          <li><strong>Bias and fairness:</strong> Unequal or discriminatory behavior across demographics or contexts.</li>
+        </ul>
+        <h3>Front-Risk Metrics (Summary)</h3>
+        <figure class="article__figure article__figure--chart">
+          <div id="chart-front-risk-scores" class="plotly-chart" aria-label="Front-risk scores by category"></div>
+          <figcaption><em>Safety scores by category (0–1). Interactive—hover for values.</em></figcaption>
+        </figure>
+        <div class="article__table-wrap">
+          <table class="sortable" data-sortable>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th data-type="number">Score</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Harmful instruction compliance</td><td data-value="0.94">0.94</td><td>Pass</td></tr>
+              <tr><td>Jailbreak resistance</td><td data-value="0.89">0.89</td><td>Pass</td></tr>
+              <tr><td>Misinformation / consistency</td><td data-value="0.91">0.91</td><td>Pass</td></tr>
+              <tr><td>Bias and fairness</td><td data-value="0.87">0.87</td><td>Monitor</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Scores are normalized to [0, 1] with higher values indicating safer behavior. "Pass"
+          indicates within acceptable threshold; "Monitor" indicates borderline and recommended
+          for ongoing evaluation.
+        </p>
+      </section>
+
+      <section id="findings" class="article__section animate-on-scroll">
+        <h2>Findings</h2>
+        <p>
+          Overall, the framework performs within acceptable bounds on the evaluated safety criteria.
+          The front-risk report highlights one category (bias and fairness) for continued
+          monitoring. Below we provide an illustrative view of refusal rate across prompt
+          categories.
+        </p>
+        <figure class="article__figure article__figure--chart">
+          <div id="chart-refusal-rate" class="plotly-chart" aria-label="Refusal rate by prompt category"></div>
+          <figcaption><em>Refusal rate by prompt category. Interactive—hover for values.</em></figcaption>
+        </figure>
+        <div class="article__table-wrap">
+          <table class="sortable" data-sortable>
+            <thead>
+              <tr>
+                <th>Benchmark</th>
+                <th>Metric</th>
+                <th data-type="number">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Safety (refusal)</td><td>Harmful instruction</td><td data-value="96.2">96.2%</td></tr>
+              <tr><td>Safety (refusal)</td><td>Jailbreak</td><td data-value="91.1">91.1%</td></tr>
+              <tr><td>Consistency</td><td>Paraphrase agreement</td><td data-value="88.4">88.4%</td></tr>
+              <tr><td>Fairness</td><td>Demographic parity (proxy)</td><td data-value="85.0">85.0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="llm-evaluation" class="article__section animate-on-scroll">
+        <h2>Experiments</h2>
+        <p>
+          Benchmark results across 10 frontier models from major providers. Scores are normalized where applicable;
+          higher is better unless noted. Data is illustrative for framework demonstration.
+        </p>
+        <div id="llm-eval-table-container" class="article__table-wrap article__table-wrap--wide eval-table-wrap">
+          <!-- Table is built from js/llm-evaluation-data.js by js/llm-eval-table.js -->
+        </div>
+        <p class="eval-table-caption">
+          <em>MMLU, HumanEval (pass@1), GSM8K, TruthfulQA, HellaSwag, ARC-Challenge, Winogrande, BBH, DROP, GPQA. Scores are percent or normalized; see benchmark documentation for details.</em>
+        </p>
+        <div class="eval-radar-wrap">
+          <label for="llm-eval-radar-select" class="eval-radar-label">Radar Chart by Model</label>
+          <select id="llm-eval-radar-select" class="eval-radar-select" aria-label="Select model for radar chart"></select>
+          <div id="llm-eval-radar" class="eval-radar-chart" aria-label="Benchmark radar chart"></div>
+        </div>
+        <div class="eval-scatter-wrap">
+          <label class="eval-radar-label">Scatter: Benchmark vs Benchmark</label>
+          <div class="eval-scatter-controls">
+            <label for="llm-eval-scatter-x" class="eval-scatter-axis-label">X</label>
+            <select id="llm-eval-scatter-x" class="eval-radar-select" aria-label="X axis benchmark"></select>
+            <label for="llm-eval-scatter-y" class="eval-scatter-axis-label">Y</label>
+            <select id="llm-eval-scatter-y" class="eval-radar-select" aria-label="Y axis benchmark"></select>
+          </div>
+          <div id="llm-eval-scatter" class="eval-radar-chart" aria-label="Benchmark scatter plot"></div>
+        </div>
+      </section>
+
+      <section id="conclusion" class="article__section animate-on-scroll">
+        <h2>Conclusion</h2>
+        <p>
+          The SafeWork F1.5 safety evaluation and front-risk report indicate that the model meets
+          the defined safety thresholds for the assessed dimensions. We recommend (1) ongoing
+          monitoring of bias and fairness metrics, (2) periodic red-teaming, and (3) versioned
+          re-evaluation upon major model updates.
+        </p>
+        <p>
+          This report is intended for technical and policy stakeholders. For the full
+          methodology and raw data, refer to the accompanying documentation and release
+          materials.
+        </p>
+      </section>
+    </div>
+
+    <footer class="article__footer animate-on-scroll">
+      <div class="article__footer-top">
+        <a href="index.html" class="article__footer-logo">SafeWork</a>
+        <nav class="article__footer-nav" aria-label="Footer">
+          <a href="publications.html">Publications</a>
+          <a href="index.html#updates">Updates</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <div class="article__tags">
+        <span>2026</span>
+        <span>Safety</span>
+      </div>
+      <p class="article__author">SafeWork Team</p>
+    </footer>
+  </article>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.27.0/plotly.min.js"></script>
+  <script src="js/llm-evaluation-data.js"></script>
+  <script src="js/llm-eval-table.js"></script>
+  <script src="js/llm-eval-radar.js"></script>
+  <script src="js/llm-eval-scatter.js"></script>
+  <script src="js/charts-and-tables.js"></script>
+  <script src="js/home.js"></script>
+  <script>
+    (function () {
+      var btn = document.querySelector('.toc-toggle');
+      var layout = document.getElementById('page-layout');
+      if (btn && layout) {
+        var closed = localStorage.getItem('report-sidebar-closed') === '1';
+        if (closed) {
+          layout.classList.add('sidebar-closed');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+        btn.addEventListener('click', function () {
+          layout.classList.toggle('sidebar-closed');
+          var isClosed = layout.classList.contains('sidebar-closed');
+          btn.setAttribute('aria-expanded', isClosed ? 'false' : 'true');
+          localStorage.setItem('report-sidebar-closed', isClosed ? '1' : '0');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

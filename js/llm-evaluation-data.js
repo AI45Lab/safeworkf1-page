@@ -1,0 +1,188 @@
+/**
+ * LLM evaluation table data — edit this file to update the report table.
+ * Add/remove models or benchmarks in the arrays; keep property names in sync with BENCHMARKS.
+ */
+
+/**
+ * Chart palette: distinct hues, muted for a premium look.
+ * Each color is clearly different; all are refined (no neon).
+ */
+window.CHART_PALETTE = [
+  '#1e40af', // deep blue
+  '#0d9488', // teal
+  '#166534', // forest green
+  '#b45309', // amber
+  '#6d28d9', // violet
+  '#9f1239', // rose
+  '#0e7490', // cyan
+  '#4338ca', // indigo
+  '#0f766e', // dark teal
+  '#92400e', // warm brown
+];
+
+window.LLM_EVALUATION_DATA = {
+  benchmarks: [
+    'MMLU',
+    'HumanEval',
+    'GSM8K',
+    'TruthfulQA',
+    'HellaSwag',
+    'ARC',
+    'Winogrande',
+    'BBH',
+    'DROP',
+    'GPQA',
+  ],
+  models: [
+    {
+      provider: 'OpenAI',
+      providerDomain: 'openai.com',
+      model: 'GPT-4o',
+      MMLU: 88.7,
+      HumanEval: 90.2,
+      GSM8K: 95.1,
+      TruthfulQA: 72.4,
+      HellaSwag: 96.2,
+      ARC: 96.8,
+      Winogrande: 87.3,
+      BBH: 86.5,
+      DROP: 84.2,
+      GPQA: 61.2,
+    },
+    {
+      provider: 'OpenAI',
+      providerDomain: 'openai.com',
+      model: 'GPT-4 Turbo',
+      MMLU: 86.4,
+      HumanEval: 90.2,
+      GSM8K: 94.2,
+      TruthfulQA: 68.9,
+      HellaSwag: 95.6,
+      ARC: 95.1,
+      Winogrande: 85.1,
+      BBH: 83.2,
+      DROP: 81.8,
+      GPQA: 58.4,
+    },
+    {
+      provider: 'Anthropic',
+      providerDomain: 'anthropic.com',
+      model: 'Claude 3.5 Sonnet',
+      MMLU: 88.1,
+      HumanEval: 84.8,
+      GSM8K: 95.4,
+      TruthfulQA: 76.2,
+      HellaSwag: 96.0,
+      ARC: 96.2,
+      Winogrande: 86.6,
+      BBH: 84.8,
+      DROP: 83.5,
+      GPQA: 62.8,
+    },
+    {
+      provider: 'Anthropic',
+      providerDomain: 'anthropic.com',
+      model: 'Claude 3 Opus',
+      MMLU: 86.8,
+      HumanEval: 84.2,
+      GSM8K: 94.8,
+      TruthfulQA: 74.5,
+      HellaSwag: 95.8,
+      ARC: 95.6,
+      Winogrande: 85.4,
+      BBH: 83.9,
+      DROP: 82.1,
+      GPQA: 60.1,
+    },
+    {
+      provider: 'Google',
+      providerDomain: 'google.com',
+      model: 'Gemini 1.5 Pro',
+      MMLU: 87.2,
+      HumanEval: 82.3,
+      GSM8K: 94.6,
+      TruthfulQA: 71.8,
+      HellaSwag: 95.9,
+      ARC: 95.4,
+      Winogrande: 85.8,
+      BBH: 84.1,
+      DROP: 82.6,
+      GPQA: 59.2,
+    },
+    {
+      provider: 'Google',
+      providerDomain: 'google.com',
+      model: 'Gemini 1.5 Flash',
+      MMLU: 83.5,
+      HumanEval: 75.6,
+      GSM8K: 91.2,
+      TruthfulQA: 68.2,
+      HellaSwag: 94.2,
+      ARC: 92.8,
+      Winogrande: 82.4,
+      BBH: 79.5,
+      DROP: 78.1,
+      GPQA: 52.4,
+    },
+    {
+      provider: 'Meta',
+      providerDomain: 'meta.com',
+      model: 'Llama 3.1 405B',
+      MMLU: 86.5,
+      HumanEval: 82.9,
+      GSM8K: 93.8,
+      TruthfulQA: 69.4,
+      HellaSwag: 95.2,
+      ARC: 94.6,
+      Winogrande: 84.2,
+      BBH: 82.8,
+      DROP: 80.5,
+      GPQA: 56.8,
+    },
+    {
+      provider: 'Mistral',
+      providerDomain: 'mistral.ai',
+      model: 'Mistral Large',
+      MMLU: 84.2,
+      HumanEval: 78.7,
+      GSM8K: 90.5,
+      TruthfulQA: 65.8,
+      HellaSwag: 93.8,
+      ARC: 92.2,
+      Winogrande: 81.2,
+      BBH: 78.4,
+      DROP: 76.2,
+      GPQA: 51.2,
+    },
+    {
+      provider: 'Cohere',
+      providerDomain: 'cohere.com',
+      model: 'Command R+',
+      MMLU: 82.8,
+      HumanEval: 72.4,
+      GSM8K: 88.6,
+      TruthfulQA: 64.2,
+      HellaSwag: 92.6,
+      ARC: 90.8,
+      Winogrande: 79.5,
+      BBH: 76.2,
+      DROP: 74.1,
+      GPQA: 48.6,
+    },
+    {
+      provider: 'DeepSeek',
+      providerDomain: 'deepseek.com',
+      model: 'DeepSeek V3',
+      MMLU: 87.6,
+      HumanEval: 85.4,
+      GSM8K: 96.2,
+      TruthfulQA: 70.1,
+      HellaSwag: 95.5,
+      ARC: 95.8,
+      Winogrande: 85.2,
+      BBH: 84.2,
+      DROP: 83.2,
+      GPQA: 58.9,
+    },
+  ],
+};
