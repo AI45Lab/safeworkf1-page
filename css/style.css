@@ -3,12 +3,17 @@
 :root {
   --bg: #ffffff;
   --bg-subtle: #fafafa;
+  --bg-warm: #fafbfc;
   --text: #0a0a0a;
   --text-secondary: #737373;
   --border: #e5e5e5;
   --border-light: #f0f0f0;
   --link: #0a0a0a;
   --link-underline: #a3a3a3;
+  /* Single accent for hierarchy and focus—used sparingly */
+  --accent: #4f46e5;
+  --accent-muted: rgba(79, 70, 229, 0.08);
+  --accent-border: rgba(79, 70, 229, 0.25);
 
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", "SF Mono", ui-monospace, monospace;
@@ -17,6 +22,42 @@
   --layout-gap: 1.5rem;
   --layout-width: calc(var(--toc-width) + var(--content-width) + var(--layout-gap));
   --header-height: 56px;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg: #111111;
+  --bg-subtle: #1a1a1a;
+  --bg-warm: #151515;
+  --text: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --border: #2a2a2a;
+  --border-light: #333333;
+  --link: #f5f5f5;
+  --link-underline: #525252;
+  --accent: #818cf8;
+  --accent-muted: rgba(129, 140, 248, 0.15);
+  --accent-border: rgba(129, 140, 248, 0.45);
+  --hover-bg: rgba(255, 255, 255, 0.06);
+  --code-bg: #1e1e1e;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-sticky: 2px 0 4px -2px rgba(0, 0, 0, 0.35);
+  --tr-hover: rgba(255, 255, 255, 0.04);
+  --tr-even: rgba(255, 255, 255, 0.02);
+  --tr-even-hover: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .home {
+  --home-text: #f5f5f5;
+  --home-muted: #a3a3a3;
+  --home-border: #2a2a2a;
+  --home-bg: #111111;
+  --home-bg-subtle: #1a1a1a;
+}
+
+[data-theme="dark"] .home-header {
+  background: rgba(17, 17, 17, 0.85);
 }
 
 * {
@@ -33,7 +74,7 @@ body {
   font-size: 16px;
   line-height: 1.65;
   color: var(--text);
-  background: var(--bg);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 12rem, var(--bg) 100%);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
@@ -72,7 +113,7 @@ body {
 
 .toc-toggle:hover {
   color: var(--text);
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--hover-bg, rgba(0, 0, 0, 0.06));
 }
 
 .toc-toggle[aria-expanded="false"] {
@@ -93,6 +134,43 @@ body {
 
 .site-header__logo:hover {
   text-decoration: underline;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.theme-toggle:hover {
+  color: var(--text);
+  background: var(--hover-bg, rgba(0, 0, 0, 0.06));
+}
+.theme-toggle__icon {
+  display: block;
+}
+.theme-toggle .theme-toggle__icon--sun {
+  display: none;
+}
+.theme-toggle .theme-toggle__icon--moon {
+  display: block;
+}
+[data-theme="dark"] .theme-toggle .theme-toggle__icon--sun {
+  display: block;
+}
+[data-theme="dark"] .theme-toggle .theme-toggle__icon--moon {
+  display: none;
 }
 
 /* Page layout: TOC left + article right */
@@ -175,10 +253,11 @@ body {
 
 .toc__list a:hover {
   color: var(--text);
+  background: var(--accent-muted);
 }
 
 .toc__list a:active {
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--hover-bg, rgba(0, 0, 0, 0.06));
   color: var(--text);
 }
 
@@ -242,10 +321,12 @@ body {
 
 .article__lead {
   font-size: 1.125rem;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--text-secondary);
   margin: 0 0 1.5rem;
   max-width: 60ch;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .article__cta {
@@ -279,7 +360,7 @@ body {
 /* Body: flowing sections */
 .article__body {
   border-top: 1px solid var(--border);
-  padding-top: 1rem;
+  padding-top: 1.5rem;
 }
 
 .article__section {
@@ -296,6 +377,8 @@ body {
   letter-spacing: -0.02em;
   margin: 0 0 1rem;
   color: var(--text);
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent-border);
 }
 
 .article__section h3 {
@@ -330,7 +413,7 @@ body {
   font-family: var(--font-mono);
   font-size: 0.875em;
   padding: 0.15em 0.4em;
-  background: #f5f5f5;
+  background: var(--code-bg, #f5f5f5);
   color: var(--text);
   border-radius: 4px;
 }
@@ -338,7 +421,7 @@ body {
 .article__section pre {
   overflow-x: auto;
   padding: 1rem 1.25rem;
-  background: #f5f5f5;
+  background: var(--code-bg, #f5f5f5);
   border-radius: 6px;
   border: 1px solid var(--border);
   margin: 1.25rem 0;
@@ -371,6 +454,7 @@ body {
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.04));
 }
 
 .article__figure--chart .plotly-chart .svg-container {
@@ -403,7 +487,8 @@ body {
   overflow-x: auto;
   margin: 1.25rem 0;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.04));
 }
 
 .article__table-wrap table {
@@ -422,8 +507,9 @@ body {
 
 .article__table-wrap th {
   font-weight: 500;
-  background: #fafafa;
+  background: var(--bg-subtle);
   color: var(--text);
+  letter-spacing: 0.01em;
 }
 
 .article__table-wrap th.sortable-th {
@@ -432,7 +518,7 @@ body {
 }
 
 .article__table-wrap th.sortable-th:hover {
-  background: #f0f0f0;
+  background: var(--border-light);
 }
 
 .article__table-wrap th[aria-sort="ascending"]::after {
@@ -457,7 +543,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: auto;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md, 0 1px 3px rgba(0, 0, 0, 0.06));
 }
 
 .eval-table {
@@ -493,7 +579,7 @@ body {
   z-index: 2;
   white-space: nowrap;
   font-weight: 500;
-  box-shadow: 2px 0 4px -2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sticky, 2px 0 4px -2px rgba(0, 0, 0, 0.06));
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -526,15 +612,15 @@ body {
 }
 
 .eval-table tbody tr:hover {
-  background: rgba(0, 0, 0, 0.02);
+  background: var(--tr-hover, rgba(0, 0, 0, 0.02));
 }
 
 .eval-table tbody tr:nth-child(even) {
-  background: rgba(0, 0, 0, 0.01);
+  background: var(--tr-even, rgba(0, 0, 0, 0.01));
 }
 
 .eval-table tbody tr:nth-child(even):hover {
-  background: rgba(0, 0, 0, 0.03);
+  background: var(--tr-even-hover, rgba(0, 0, 0, 0.03));
 }
 
 .eval-table td:not(.eval-table__provider) {
@@ -726,7 +812,6 @@ a:focus-visible {
   .page-layout.sidebar-closed .toc {
     display: none;
   }
-}
 
   .toc__list {
     border-left: none;
