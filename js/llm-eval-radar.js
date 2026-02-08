@@ -20,14 +20,17 @@
     var r = benchmarks.map(function (b) {
       return model[b] != null ? Number(model[b]) : 0;
     });
+    var theta = benchmarks.slice();
+    // Close the polygon by repeating the first point at the end
+    r = r.concat(r[0]);
+    theta = theta.concat(theta[0]);
     return {
       type: 'scatterpolar',
       r: r,
-      theta: benchmarks.slice(),
+      theta: theta,
       name: getModelLabel(model),
-      fill: 'toself',
-      fillcolor: color,
-      line: { color: color, width: 1.5 },
+      fill: 'none',
+      line: { color: color, width: 2 },
       opacity: opacity != null ? opacity : 1,
     };
   }

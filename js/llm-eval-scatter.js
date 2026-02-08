@@ -60,9 +60,9 @@
       margin: { t: 40, r: 40, b: 56, l: 56 },
       showlegend: false,
       hoverlabel: {
-        bgcolor: 'rgba(255,255,255,0.96)',
+        bgcolor: 'rgba(255,255,255,0.98)',
         bordercolor: '#e5e5e5',
-        font: { size: 12 },
+        font: { size: 12, color: '#0a0a0a' },
       },
       height: 400,
     };
@@ -81,8 +81,12 @@
       return getModelLabel(m) + '<br>' + xBench + ': ' + (m[xBench] != null ? m[xBench] : '–') + '<br>' + yBench + ': ' + (m[yBench] != null ? m[yBench] : '–');
     });
     var palette = window.CHART_PALETTE || ['#1e40af', '#0d9488', '#166534', '#b45309', '#6d28d9', '#9f1239', '#0e7490', '#4338ca', '#0f766e', '#92400e'];
+    var symbols = ['circle', 'square', 'diamond', 'triangle-up', 'star', 'hexagon', 'cross', 'x', 'triangle-down', 'pentagon'];
     var colors = models.map(function (_, i) {
       return palette[i % palette.length];
+    });
+    var symbolList = models.map(function (_, i) {
+      return symbols[i % symbols.length];
     });
     var trace = {
       type: 'scatter',
@@ -92,9 +96,10 @@
       hovertext: text,
       hoverinfo: 'text',
       marker: {
-        size: 12,
+        size: 14,
         color: colors,
-        line: { color: 'rgba(0, 0, 0, 0.15)', width: 1 },
+        symbol: symbolList,
+        line: { color: 'rgba(0, 0, 0, 0.2)', width: 1.5 },
       },
     };
     Plotly.react(container, [trace], getLayout(xBench, yBench, xVal, yVal), {
