@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Updates | SafeWork-F</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/publications.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="site-header__logo">SafeWork-F</a>
+      <nav class="site-header__nav" aria-label="Main">
+        <a href="publications.html" class="site-header__nav-link">Publications</a>
+        <a href="updates.html" class="site-header__nav-link site-header__nav-link--active">Updates</a>
+        <a href="contact.html" class="site-header__nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="publications-page updates-page">
+    <div class="publications-page__inner">
+      <header class="publications-header">
+        <h1 class="publications-header__title animate-in">Updates</h1>
+        <p class="publications-header__lead animate-in animate-in--delay-1">
+          Version history. New releases and updates are listed here.
+        </p>
+      </header>
+
+      <ul class="updates-list updates-list--page">
+        <li class="updates-list__item animate-on-scroll">
+          <div class="updates-list__meta-row">
+            <span class="updates-list__version">F1.5</span>
+            <span class="updates-list__meta">Current</span>
+            <time class="updates-list__date" datetime="2026-02-08">February 8, 2026</time>
+          </div>
+          <p class="updates-list__desc">Incremental update: safety report with evaluation of more recent models and benchmarks. Builds on F1.0. Includes methodology, front-risk assessment, LLM evaluation table and charts (radar, scatter), and recommendations.</p>
+          <a href="report.html" class="link-arrow">View report</a>
+        </li>
+        <li class="updates-list__item animate-on-scroll">
+          <div class="updates-list__meta-row">
+            <span class="updates-list__version">DeepSight: from evaluation to diagnosis</span>
+            <span class="updates-list__meta">GitHub</span>
+            <time class="updates-list__date" datetime="2025-11">November 2025</time>
+          </div>
+          <p class="updates-list__desc">Unified evaluation–diagnosis pipeline combining <strong>DeepSafe</strong> (all-in-one safety evaluation toolkit for LLMs and MLLMs: 25+ datasets, ProGuard model; benchmarks used in SafeWork-F) and <strong>DeepScan</strong> (diagnostic framework with Register → Configure → Execute → Summarize workflow). Use together for full evaluation and diagnosis.</p>
+          <a href="https://github.com/AI45Lab/DeepSafe" class="link-arrow" target="_blank" rel="noopener">DeepSafe</a>
+          <span class="updates-list__sep" aria-hidden="true"> · </span>
+          <a href="https://github.com/AI45Lab/DeepScan" class="link-arrow" target="_blank" rel="noopener">DeepScan</a>
+        </li>
+        <li class="updates-list__item animate-on-scroll">
+          <div class="updates-list__meta-row">
+            <span class="updates-list__version">F1.0</span>
+            <span class="updates-list__meta">Initial release</span>
+            <time class="updates-list__date" datetime="2025-07">July 2025</time>
+          </div>
+          <p class="updates-list__desc">First release of SafeWork-F: Frontier Risk Management Framework — structured risk framework, front-risk definitions, and safety evaluation methodology.</p>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="publications-footer">
+    <div class="publications-footer__inner">
+      <div class="publications-footer__top">
+        <a href="index.html" class="publications-footer__logo">SafeWork-F</a>
+        <nav class="publications-footer__nav" aria-label="Footer">
+          <a href="publications.html">Publications</a>
+          <a href="updates.html">Updates</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <p class="publications-footer__copy">Structured risk assessment for frontier AI systems. <span class="publications-footer__version">F1.5</span></p>
+    </div>
+  </footer>
+
+  <script src="js/home.js"></script>
+</body>
+</html>
