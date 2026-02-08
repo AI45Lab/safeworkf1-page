@@ -35,9 +35,7 @@
     };
   }
 
-  var palette = window.CHART_PALETTE || ['#1e40af', '#0d9488'];
-  var primaryColor = palette[0];
-  var secondaryColor = palette[1];
+  var palette = window.CHART_PALETTE || ['#1e40af', '#0d9488', '#166534', '#b45309', '#6d28d9', '#9f1239', '#0e7490', '#4338ca', '#0f766e', '#92400e'];
 
   function getLayout() {
     return {
@@ -71,8 +69,8 @@
     selectedIndices = selectedIndices || [0];
     var traces = selectedIndices.map(function (idx, i) {
       var model = models[idx];
-      var color = i === 0 ? primaryColor : secondaryColor;
-      return buildTrace(model, color, i === 0 ? 1 : 0.7);
+      var color = palette[idx % palette.length];
+      return buildTrace(model, color, i === 0 ? 1 : 0.85);
     });
     Plotly.react(container, traces, getLayout(), {
       responsive: true,
