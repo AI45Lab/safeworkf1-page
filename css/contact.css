@@ -78,6 +78,14 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  column-count: 2;
+  column-gap: 2.5rem;
+}
+
+@media (max-width: 520px) {
+  .contact-block__list {
+    column-count: 1;
+  }
 }
 
 .contact-block__person {
@@ -85,6 +93,7 @@
   line-height: 1.6;
   color: var(--text);
   margin-bottom: 0.75rem;
+  break-inside: avoid;
 }
 
 .contact-block__person:last-child {

@@ -1,5 +1,9 @@
 /* Homepage: OpenAI-style + animations */
 
+html {
+  scroll-behavior: smooth;
+}
+
 .home {
   --home-text: #0a0a0a;
   --home-muted: #737373;
