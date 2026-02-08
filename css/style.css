@@ -56,9 +56,6 @@
   --home-bg-subtle: #1a1a1a;
 }
 
-[data-theme="dark"] .home-header {
-  background: rgba(17, 17, 17, 0.85);
-}
 
 * {
   box-sizing: border-box;
@@ -92,6 +89,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  line-height: 1.5;
 }
 
 .toc-toggle {

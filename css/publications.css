@@ -8,6 +8,17 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  margin-left: auto;
+}
+
+/* Group nav + theme on the right (report has no nav, keeps theme right via style.css) */
+.site-header__inner:has(.site-header__nav) .theme-toggle {
+  margin-left: 0;
+}
+
+/* Match homepage spacing between nav and theme toggle */
+.site-header__inner:has(.site-header__nav) {
+  gap: 2rem;
 }
 
 .site-header__nav-link {
