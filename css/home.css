@@ -294,6 +294,104 @@ html {
   border-bottom-color: var(--home-text);
 }
 
+/* ----- Taxonomy (Approach) ----- */
+.approach-taxonomy-title,
+.approach-pillars-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--home-text);
+}
+
+.approach-pillars-title {
+  margin-top: 2rem;
+}
+
+.approach-taxonomy-intro {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--home-muted);
+  margin: 0 0 1.25rem;
+}
+
+.taxonomy-block {
+  margin-bottom: 2.5rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--home-border);
+  border-bottom: 1px solid var(--home-border);
+}
+
+.taxonomy-block__heading {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--home-muted);
+  margin: 0 0 0.75rem;
+}
+
+.taxonomy-block__heading + .taxonomy-domains,
+.taxonomy-block__heading + .taxonomy-respects {
+  margin-top: 0;
+}
+
+.taxonomy-domains {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .taxonomy-domains {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.taxonomy-domain {
+  padding: 1rem;
+  background: var(--home-bg-subtle);
+  border: 1px solid var(--home-border);
+  border-radius: 6px;
+}
+
+.taxonomy-domain__name {
+  font-size: 0.9375rem;
+  color: var(--home-text);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.taxonomy-domain__source {
+  font-size: 0.75rem;
+  color: var(--home-muted);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.taxonomy-domain__desc {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--home-muted);
+  margin: 0;
+}
+
+.taxonomy-respects {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--home-muted);
+}
+
+.taxonomy-respects li {
+  margin-bottom: 0.35rem;
+}
+
+.taxonomy-respects li strong {
+  color: var(--home-text);
+}
+
 /* ----- Approach list ----- */
 .approach-list {
   list-style: none;
