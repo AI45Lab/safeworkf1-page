@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Safety Report | SafeWork F1.5</title>
+  <title>Safety Report | SafeWork-F F1.5</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/publications.css">
 </head>
 <body>
   <header class="site-header">
@@ -17,7 +18,7 @@
           <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
         </svg>
       </button>
-      <a href="index.html" class="site-header__logo">SafeWork</a>
+      <a href="index.html" class="site-header__logo">SafeWork-F</a>
     </div>
   </header>
 
@@ -42,19 +43,14 @@
       <div class="article__meta">
         <time class="article__date">February 8, 2026</time>
         <nav class="article__breadcrumb" aria-label="Categories">
-          <a href="index.html">SafeWork</a>
+          <a href="index.html">SafeWork-F</a>
           <a href="index.html#updates">Releases</a>
         </nav>
       </div>
       <h1 class="article__title">Safety Report — F1.5</h1>
       <p class="article__lead">
-        SafeWork F1.5 evaluates more recent models and benchmarks than F1.0. This report covers safety evaluation and front-risk assessment,
+        SafeWork-F F1.5 evaluates more recent models and benchmarks than F1.0. This report covers safety evaluation and front-risk assessment,
         model behavior under adversarial conditions, and recommendations for deployment.
-      </p>
-      <p class="article__cta">
-        <a href="https://research.ai45.shlab.org.cn/safework-f1-framework.pdf" class="article__cta-link">Frontier AI Risk Management Framework</a> (July 2025, PDF)
-        <span class="article__cta-sep" aria-hidden="true"> · </span>
-        <a href="https://arxiv.org/pdf/2507.16534" class="article__cta-link">Frontier AI Risk Management Framework in Practice: A Risk Analysis Technical Report</a> (July 2025, F1.0, PDF)
       </p>
     </header>
 
@@ -62,7 +58,7 @@
       <section id="executive-summary" class="article__section animate-on-scroll">
         <h2>Executive Summary</h2>
         <p>
-          This report presents the safety evaluation of SafeWork (Frontier Risk Management Framework),
+          This report presents the safety evaluation of SafeWork-F (Frontier Risk Management Framework),
           including assessment of front-risk factors, model behavior under adversarial and
           out-of-distribution conditions, and recommendations for deployment. The evaluation
           follows a structured risk framework and standardized benchmarks.
@@ -130,7 +126,7 @@
           summarizes the front-risk assessment for the framework.
         </p>
         <h3>Identified Front-Risk Categories</h3>
-work        <ul>
+        <ul>
           <li><strong>Harmful instruction compliance:</strong> Model response to explicitly harmful or illegal requests.</li>
           <li><strong>Jailbreak and bypass:</strong> Susceptibility to prompt engineering that circumvents safety guidelines.</li>
           <li><strong>Misinformation and consistency:</strong> Contradictory or false claims in sensitive domains.</li>
@@ -228,7 +224,7 @@ work        <ul>
       <section id="conclusion" class="article__section animate-on-scroll">
         <h2>Conclusion</h2>
         <p>
-          The SafeWork F1.5 safety evaluation and front-risk report indicate that the model meets
+          The SafeWork-F F1.5 safety evaluation and front-risk report indicate that the model meets
           the defined safety thresholds for the assessed dimensions. We recommend (1) ongoing
           monitoring of bias and fairness metrics, (2) periodic red-teaming, and (3) versioned
           re-evaluation upon major model updates.
@@ -241,23 +237,22 @@ work        <ul>
       </section>
     </div>
 
-    <footer class="article__footer animate-on-scroll">
-      <div class="article__footer-top">
-        <a href="index.html" class="article__footer-logo">SafeWork</a>
-        <nav class="article__footer-nav" aria-label="Footer">
+  </article>
+  </div>
+
+  <footer class="publications-footer">
+    <div class="publications-footer__inner">
+      <div class="publications-footer__top">
+        <a href="index.html" class="publications-footer__logo">SafeWork-F</a>
+        <nav class="publications-footer__nav" aria-label="Footer">
           <a href="publications.html">Publications</a>
           <a href="index.html#updates">Updates</a>
           <a href="contact.html">Contact</a>
         </nav>
       </div>
-      <div class="article__tags">
-        <span>2026</span>
-        <span>Safety</span>
-      </div>
-      <p class="article__author">SafeWork Team</p>
-    </footer>
-  </article>
-  </div>
+      <p class="publications-footer__copy">Structured risk assessment for frontier AI systems. <span class="publications-footer__version">F1.5</span></p>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.27.0/plotly.min.js"></script>
   <script src="js/llm-evaluation-data.js"></script>
