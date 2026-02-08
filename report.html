@@ -279,18 +279,59 @@
       var btn = document.querySelector('.toc-toggle');
       var layout = document.getElementById('page-layout');
       if (btn && layout) {
-        var closed = localStorage.getItem('report-sidebar-closed') === '1';
-        if (closed) {
-          layout.classList.add('sidebar-closed');
-          btn.setAttribute('aria-expanded', 'false');
-        }
         btn.addEventListener('click', function () {
           layout.classList.toggle('sidebar-closed');
           var isClosed = layout.classList.contains('sidebar-closed');
           btn.setAttribute('aria-expanded', isClosed ? 'false' : 'true');
-          localStorage.setItem('report-sidebar-closed', isClosed ? '1' : '0');
         });
       }
+    })();
+  </script>
+  <script>
+    (function () {
+      var tocLinks = document.querySelectorAll('.toc__list a[href^="#"]');
+      var sections = [];
+      tocLinks.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        var section = id && document.getElementById(id);
+        if (section) sections.push({ link: a, section: section });
+      });
+      if (sections.length === 0) return;
+
+      var headerOffset = 120;
+      function setActive() {
+        var active = null;
+        var last = sections[sections.length - 1];
+
+        for (var i = 0; i < sections.length; i++) {
+          var rect = sections[i].section.getBoundingClientRect();
+          if (rect.top <= headerOffset) active = sections[i];
+        }
+        if (!active && sections.length) {
+          var lastRect = last.section.getBoundingClientRect();
+          if (lastRect.top < window.innerHeight) {
+            active = last;
+          } else {
+            active = sections[0];
+          }
+        }
+        sections.forEach(function (s) {
+          s.link.classList.toggle('is-active', s === active);
+        });
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(function () {
+            setActive();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      setActive();
     })();
   </script>
 </body>
