@@ -16,8 +16,9 @@
   --accent-border: rgba(79, 70, 229, 0.25);
 
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Lora", Georgia, "Times New Roman", serif;
   --font-mono: "IBM Plex Mono", "SF Mono", ui-monospace, monospace;
-  --content-width: 720px;
+  --content-width: 880px;
   --toc-width: 200px;
   --layout-gap: 1.5rem;
   --layout-width: calc(var(--toc-width) + var(--content-width) + var(--layout-gap));
@@ -309,6 +310,7 @@ body {
 
 /* Hero: title + lead */
 .article__title {
+  font-family: var(--font-serif);
   font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -355,8 +357,9 @@ body {
   font-weight: 400;
 }
 
-/* Body: flowing sections */
+/* Body: flowing sections (serif for publication content) */
 .article__body {
+  font-family: var(--font-serif);
   border-top: 1px solid var(--border);
   padding-top: 1.5rem;
 }

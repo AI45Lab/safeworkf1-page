@@ -11,7 +11,7 @@ html {
   --home-bg: #ffffff;
   --home-bg-subtle: #fafafa;
   --home-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --home-max: 720px;
+  --home-max: 880px;
 }
 
 .home {
