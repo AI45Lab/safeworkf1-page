@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/publications.css">
   <link rel="stylesheet" href="css/contact.css">
   <script>
-    (function(){var k="theme";var r=document.documentElement;if(!r.getAttribute("data-theme")){var s=localStorage.getItem(k);if(s==="dark"||s==="light")r.setAttribute("data-theme",s);else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)r.setAttribute("data-theme","dark");else r.setAttribute("data-theme","light");}})();
+    (function(){var r=document.documentElement;if(!r.getAttribute("data-theme")){r.setAttribute("data-theme",window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}})();
   </script>
 </head>
 <body>

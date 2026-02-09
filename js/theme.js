@@ -1,17 +1,13 @@
 (function () {
-  var STORAGE_KEY = "theme";
   var root = document.documentElement;
 
-  function getPreferred() {
-    var stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === "light" || stored === "dark") return stored;
+  function getSystemTheme() {
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
     return "light";
   }
 
   function setTheme(value) {
     root.setAttribute("data-theme", value);
-    localStorage.setItem(STORAGE_KEY, value);
     var btn = document.querySelector(".theme-toggle");
     if (btn) {
       btn.setAttribute("aria-label", value === "dark" ? "Switch to light theme" : "Switch to dark theme");
@@ -23,11 +19,10 @@
     setTheme(next);
   }
 
-  setTheme(getPreferred());
+  setTheme(getSystemTheme());
 
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
-      if (localStorage.getItem(STORAGE_KEY)) return;
       setTheme(e.matches ? "dark" : "light");
     });
   }
