@@ -531,6 +531,16 @@ body.home .site-header {
   color: var(--home-text);
 }
 
+/* ----- What We Do pillars subtitle ----- */
+.wwd-pillars-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--home-muted);
+  margin: 2rem 0 0;
+}
+
 /* ----- Approach list ----- */
 .approach-list {
   list-style: none;
