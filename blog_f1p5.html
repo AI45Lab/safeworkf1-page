@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1.5 Safety Report | SafeWork-F</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/publications.css">
+  <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.27.0/plotly.min.js"></script>
+  <script>
+    (function(){var r=document.documentElement;if(!r.getAttribute("data-theme")){r.setAttribute("data-theme",window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}})();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button type="button" class="toc-toggle" aria-label="Toggle table of contents" aria-expanded="true">
+        <svg class="toc-toggle__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+        </svg>
+      </button>
+      <a href="index.html" class="site-header__logo">SafeWork-F</a>
+      <nav class="site-header__nav" aria-label="Main">
+        <a href="publications.html" class="site-header__nav-link site-header__nav-link--active">Publications</a>
+        <a href="updates.html" class="site-header__nav-link">Updates</a>
+        <a href="contact.html" class="site-header__nav-link">Contact</a>
+      </nav>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme">
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="page-layout" id="page-layout">
+    <aside class="toc animate-on-scroll" aria-label="On this page">
+      <nav class="toc__nav">
+        <p class="toc__title">On this page</p>
+        <ul class="toc__list">
+          <li><a href="#abstract">Abstract</a></li>
+          <li><a href="#introduction">1. Introduction</a></li>
+          <li><a href="#models">2. Evaluated Models</a></li>
+          <li><a href="#risk-evaluation">3. Risk Evaluation</a></li>
+          <li><a href="#results">4. Experimental Results</a></li>
+          <li><a href="#defense">5. Adversarial Defense</a></li>
+          <li><a href="#persuasion">6. Persuasion Risks</a></li>
+          <li><a href="#persuasion-results">7. Persuasion Results</a></li>
+          <li><a href="#mitigation">8. Mitigating Persuasion</a></li>
+          <li><a href="#discussion">9. Discussion</a></li>
+          <li><a href="#conclusion">10. Conclusion</a></li>
+          <li><a href="#citation">Citation</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <article class="article">
+      <header class="article__header animate-in">
+        <div class="article__meta">
+          <time class="article__date">February 2026</time>
+          <nav class="article__breadcrumb" aria-label="Categories">
+            <a href="index.html">SafeWork-F</a>
+            <a href="updates.html">Releases</a>
+          </nav>
+        </div>
+        <h1 class="article__title">Frontier AI Risk Management Framework in Practice (F1.5)</h1>
+        <p class="article__lead">
+          Building on F1.0, this update extends the risk assessment to five critical dimensions — cyber offense, persuasion, strategic deception, uncontrolled AI R&amp;D, and self-replication — with new evaluations across the latest frontier models and practical mitigation strategies for each.
+        </p>
+        <p class="article__report-link">
+          <a href="https://huggingface.co/papers/2602.14457" class="article__report-btn" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Read the full paper on Hugging Face
+          </a>
+        </p>
+      </header>
+
+      <div class="article__body">
+
+        <section id="abstract" class="article__section animate-on-scroll">
+          <h2>Abstract</h2>
+          <p>
+            Rapid advances in large language models (LLMs) and agentic AI systems introduce new safety risks that extend beyond traditional AI capability benchmarks. To systematically analyze these emerging threats, we present <strong>Frontier AI Risk Management Framework in Practice (F1.5)</strong>, an updated risk analysis framework evaluating frontier models across multiple realistic scenarios.
+          </p>
+          <p>
+            This version introduces a more granular evaluation across <strong>five critical risk dimensions</strong>: cyber offense, persuasion and manipulation, strategic deception, uncontrolled AI R&amp;D, and self-replication. We evaluate a diverse set of frontier models from major research organizations and propose <strong>practical mitigation strategies</strong>, including adversarial defense mechanisms and training pipelines designed to reduce manipulation risks.
+          </p>
+          <p>
+            Our findings show that while current frontier models exhibit <strong>limited autonomous execution capabilities</strong>, they already demonstrate concerning abilities in areas such as persuasion and vulnerability exploitation. These results highlight the importance of <strong>continuous risk evaluation and mitigation frameworks</strong> for safe deployment of frontier AI systems.
+          </p>
+        </section>
+
+        <section id="introduction" class="article__section animate-on-scroll">
+          <h2>1. Introduction</h2>
+          <p>
+            Recent years have witnessed significant progress in artificial intelligence, with large language models achieving human-level performance across many domains. At the same time, these models raise concerns about <strong>frontier risks</strong> — high-impact risks associated with general-purpose AI systems.
+          </p>
+          <p>
+            Previous work introduced the <strong>Frontier AI Risk Management Framework (F1)</strong>, which evaluated risks across several categories. The rapid development of reasoning models and autonomous AI agents motivates a comprehensive update.
+          </p>
+          <p>Version <strong>F1.5</strong> focuses on five critical risk areas:</p>
+          <ol>
+            <li>Cyber Offense</li>
+            <li>Persuasion and Manipulation</li>
+            <li>Strategic Deception and Scheming</li>
+            <li>Uncontrolled Autonomous AI R&amp;D</li>
+            <li>Self-Replication</li>
+          </ol>
+          <p>
+            This update aims to provide <strong>practical evaluation methodologies and mitigation strategies</strong> that can guide safer deployment of advanced AI systems.
+          </p>
+        </section>
+
+        <section id="models" class="article__section animate-on-scroll">
+          <h2>2. Evaluated Frontier Models</h2>
+          <p>
+            To study frontier risks, we evaluated a diverse set of recent LLMs spanning both <strong>open-source and proprietary models</strong>.
+          </p>
+          <p>The evaluation set includes models from:</p>
+          <ul>
+            <li>OpenAI</li>
+            <li>Google DeepMind</li>
+            <li>Anthropic</li>
+            <li>Alibaba</li>
+            <li>ByteDance</li>
+            <li>Moonshot AI</li>
+            <li>Tencent</li>
+            <li>xAI</li>
+          </ul>
+          <p>The models were selected based on the following principles:</p>
+          <h3>Diversity in Scale</h3>
+          <p>
+            Models range from <strong>27B to 1000B parameters</strong>, enabling analysis of how model scale influences risk profiles.
+          </p>
+          <h3>Diversity in Accessibility</h3>
+          <p>
+            Both <strong>open-source models and proprietary systems</strong> are included to study differences in deployment paradigms.
+          </p>
+          <h3>Functional Specialization</h3>
+          <p>We distinguish between:</p>
+          <ul>
+            <li><strong>Standard instruction-following models</strong></li>
+            <li><strong>Reasoning-enhanced models</strong></li>
+          </ul>
+          <p>
+            This allows us to investigate whether <strong>advanced reasoning capability correlates with specific risk patterns</strong>.
+          </p>
+          <div class="article__table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Developer</th>
+                  <th>Accessibility</th>
+                  <th>Functional</th>
+                  <th>Scale</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Kimi-K2-Instruct-0905</td><td>Moonshot</td><td>Open-Source</td><td>Standard</td><td>1000B</td></tr>
+                <tr><td>Seed-OSS-36B-Instruct</td><td>ByteDance</td><td>Open-Source</td><td>Standard</td><td>36B</td></tr>
+                <tr><td>MiniMax-M2.1</td><td>MiniMax</td><td>Open-Source</td><td>Standard</td><td>230B</td></tr>
+                <tr><td>GLM-4.7</td><td>Zhipu AI</td><td>Open-Source</td><td>Standard</td><td>358B</td></tr>
+                <tr><td>Hunyuan-A13B-Instruct</td><td>Tencent</td><td>Open-Source</td><td>Standard</td><td>80B</td></tr>
+                <tr><td>Gemma-3-27B-It</td><td>Google DeepMind</td><td>Open-Source</td><td>Standard</td><td>27B</td></tr>
+                <tr><td>Qwen3-235B-A22B-Thinking-2507</td><td>Alibaba</td><td>Open-Source</td><td>Reasoning</td><td>235B</td></tr>
+                <tr><td>Qwen3-max</td><td>Alibaba</td><td>Proprietary</td><td>Reasoning</td><td>—</td></tr>
+                <tr><td>GPT-5.2-2025-12-11</td><td>OpenAI</td><td>Proprietary</td><td>Reasoning</td><td>—</td></tr>
+                <tr><td>Claude Sonnet 4.5 (Thinking)</td><td>Anthropic</td><td>Proprietary</td><td>Reasoning</td><td>—</td></tr>
+                <tr><td>Gemini-3-Pro</td><td>Google</td><td>Proprietary</td><td>Standard</td><td>—</td></tr>
+                <tr><td>Doubao-seed-1-8-251228</td><td>ByteDance</td><td>Proprietary</td><td>Reasoning</td><td>—</td></tr>
+                <tr><td>Grok-4</td><td>xAI</td><td>Proprietary</td><td>Standard</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="article__caption"><em>Table 2: Evaluated models. Open-source models are listed first, followed by proprietary models, each in alphabetical order.</em></p>
+        </section>
+
+        <section id="risk-evaluation" class="article__section animate-on-scroll">
+          <h2>3. Frontier Risk Evaluation</h2>
+          <p>
+            We evaluate frontier models across five risk dimensions representing different potential failure modes of advanced AI systems.
+          </p>
+
+          <h3>3.1 Cyber Offense</h3>
+          <h4>Motivation</h4>
+          <p>
+            Advanced AI systems may assist cyber attackers by lowering the technical barriers required to conduct sophisticated attacks. These risks emerge in two primary forms:
+          </p>
+          <ul>
+            <li><strong>Uplift Risk:</strong> AI assists human attackers</li>
+            <li><strong>Autonomy Risk:</strong> AI agents autonomously execute attacks</li>
+          </ul>
+
+          <h4>PACEbench</h4>
+          <p>
+            To evaluate these risks, we introduce <strong>PACEbench</strong>, a benchmark designed to simulate realistic cyber attack environments.
+          </p>
+          <p>PACEbench evaluates agents across four increasingly complex scenarios:</p>
+          <div class="article__table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Scenario</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>A-CVE</td><td>Single vulnerability exploitation</td></tr>
+                <tr><td>B-CVE</td><td>Multi-host environments requiring reconnaissance</td></tr>
+                <tr><td>C-CVE</td><td>Multi-stage chained attacks</td></tr>
+                <tr><td>D-CVE</td><td>Exploitation under active cyber defenses</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The benchmark incorporates realistic conditions including:</p>
+          <ul>
+            <li>Real-world CVE vulnerabilities</li>
+            <li>Multi-host network environments</li>
+            <li>Production-grade web application firewalls</li>
+          </ul>
+
+          <h3>3.2 Autonomous Cyber Attack Agents</h3>
+          <p>
+            We implement <strong>PACEAgent</strong>, an LLM-based penetration testing agent built using a ReAct-style reasoning framework.
+          </p>
+          <p>The agent consists of three components:</p>
+          <h4>LLM Reasoning Engine</h4>
+          <p>Responsible for planning attack strategies and analyzing environment feedback.</p>
+          <h4>Tool Interface</h4>
+          <p>Allows the agent to use cybersecurity tools such as:</p>
+          <ul>
+            <li>Nmap</li>
+            <li>SQLMap</li>
+            <li>Dirb</li>
+            <li>Custom code execution</li>
+          </ul>
+          <h4>Execution Environment</h4>
+          <p>Sandboxed environments simulate real-world systems for vulnerability testing.</p>
+        </section>
+
+        <section id="results" class="article__section animate-on-scroll">
+          <h2>4. Experimental Results</h2>
+          <h3>Cyber Exploitation Capabilities</h3>
+          <p>Experiments reveal several key observations.</p>
+          <h4>1. Simple vulnerabilities can be exploited</h4>
+          <p>Models successfully solve many common vulnerabilities including:</p>
+          <ul>
+            <li>SQL injection</li>
+            <li>Arbitrary file read</li>
+            <li>Basic remote code execution</li>
+          </ul>
+          <h4>2. Reconnaissance is a major bottleneck</h4>
+          <p>When benign hosts are mixed with vulnerable ones, model performance drops significantly.</p>
+          <h4>3. Long-horizon attacks remain difficult</h4>
+          <p>No evaluated model successfully completed a full multi-stage attack chain.</p>
+          <h4>4. Defense evasion remains unsolved</h4>
+          <p>All tested models fail to bypass production-grade defenses such as WAF systems.</p>
+          <p>
+            Overall, current models exhibit <strong>limited autonomous offensive capability</strong>, though they can still act as powerful tools for human attackers.
+          </p>
+          <div class="article__table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>A-CVE</th>
+                  <th>B-CVE</th>
+                  <th>C-CVE</th>
+                  <th>D-CVE</th>
+                  <th>PACEbench</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Kimi-K2-Instruct-0905</td><td>0.240</td><td>0.050</td><td>0.000</td><td>0.000</td><td>0.063</td></tr>
+                <tr><td>Seed-OSS-36B-Instruct</td><td>0.290</td><td>0.050</td><td>0.000</td><td>0.000</td><td>0.075</td></tr>
+                <tr><td>MiniMax-M2.1</td><td>0.350</td><td>0.050</td><td>0.000</td><td>0.333</td><td>0.153</td></tr>
+                <tr><td>GLM-4.7</td><td>0.410</td><td>0.210</td><td>0.067</td><td>0.000</td><td>0.166</td></tr>
+                <tr><td>Qwen3-max</td><td>0.350</td><td>0.260</td><td>0.133</td><td>0.000</td><td>0.190</td></tr>
+                <tr><td>Gemini-3-Pro</td><td>0.470</td><td>0.160</td><td>0.067</td><td>0.000</td><td>0.161</td></tr>
+                <tr><td>Doubao-seed-1-8-251228</td><td>0.350</td><td>0.260</td><td>0.067</td><td>0.000</td><td>0.170</td></tr>
+                <tr><td>GPT-5.2-2025-12-11</td><td>0.410</td><td>0.370</td><td>0.067</td><td>0.333</td><td>0.280</td></tr>
+                <tr class="table-row--highlight"><td>Claude Sonnet 4.5 (Thinking)</td><td>0.590</td><td>0.370</td><td>0.133</td><td>0.333</td><td>0.335</td></tr>
+                <tr><td>Grok-4</td><td>0.060</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.012</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="article__caption"><em>Table 3: PACEbench scores per model. A-CVE: single vulnerability; B-CVE: multi-host; C-CVE: chained; D-CVE: defended. Claude Sonnet 4.5 (Thinking) achieves the highest overall score (0.335). No model succeeds on D-CVE except those with reasoning capabilities.</em></p>
+        </section>
+
+        <section id="defense" class="article__section animate-on-scroll">
+          <h2>5. Adversarial Defense: The RvB Framework</h2>
+          <p>To mitigate cyber risks, we introduce the <strong>Red Team vs Blue Team (RvB) framework</strong>.</p>
+          <p>This system models security hardening as an adversarial process:</p>
+          <ul>
+            <li><strong>Red Team Agent:</strong> discovers vulnerabilities</li>
+            <li><strong>Blue Team Agent:</strong> patches vulnerabilities</li>
+            <li>The environment updates iteratively</li>
+          </ul>
+          <p>The process creates a <strong>continuous feedback loop for security improvement</strong>.</p>
+          <h3>Results</h3>
+          <p>The RvB framework demonstrates several advantages:</p>
+          <ul>
+            <li>Defense success rate improves to <strong>~90% after several iterations</strong></li>
+            <li><strong>Service disruption is eliminated</strong></li>
+            <li><strong>Token consumption decreases by ~18%</strong> compared to cooperative agent baselines</li>
+          </ul>
+          <p>
+            These results suggest that <strong>automated adversarial testing may be an effective strategy for AI system hardening</strong>.
+          </p>
+          <figure class="article__figure article__figure--chart">
+            <div class="rvb-grid">
+              <div id="rvb-chart-1" class="plotly-chart"></div>
+              <div id="rvb-chart-2" class="plotly-chart"></div>
+              <div id="rvb-chart-3" class="plotly-chart"></div>
+              <div id="rvb-chart-4" class="plotly-chart"></div>
+            </div>
+            <figcaption><em>Figure 4: RvB performance trajectory across 5 iterations for four backbone models. Bars show Attack Success Count (ASC, left axis); line shows Defense Success Rate (DSR%, right axis). DSR consistently converges to ≥90% by iteration 5 for the stronger models. Data from the paper's Figure 4.</em></figcaption>
+          </figure>
+        </section>
+
+        <section id="persuasion" class="article__section animate-on-scroll">
+          <h2>6. Persuasion and Manipulation Risks</h2>
+          <p>
+            Another major risk dimension concerns the ability of LLMs to influence opinions through dialogue.
+          </p>
+          <p>We evaluate two types of persuasion scenarios:</p>
+          <h3>LLM-to-Human Persuasion</h3>
+          <p>
+            Models attempt to shift human opinions during multi-turn conversations across controversial topics.
+          </p>
+          <h3>LLM-to-LLM Persuasion</h3>
+          <p>
+            Models attempt to influence other AI agents in simulated decision-making tasks.
+          </p>
+        </section>
+
+        <section id="persuasion-results" class="article__section animate-on-scroll">
+          <h2>7. Persuasion Experiment Results</h2>
+          <p>Results show that modern models can be highly effective persuaders.</p>
+          <p>Key findings include:</p>
+          <ul>
+            <li>Successful persuasion rates often exceed <strong>80–98%</strong></li>
+            <li>Voting manipulation experiments show <strong>65–94% success rates</strong></li>
+            <li>Negative persuasion ("backfire effects") occur rarely</li>
+          </ul>
+          <p>
+            Interestingly, <strong>model scale does not strictly correlate with persuasion success</strong>. Some smaller models outperform larger ones in manipulation tasks.
+          </p>
+          <p>
+            These results highlight the potential for <strong>AI-driven large-scale opinion influence</strong>.
+          </p>
+          <figure class="article__figure article__figure--chart">
+            <div id="persuasion-chart" class="plotly-chart"></div>
+            <figcaption><em>Figure 5: Persuasion outcome breakdown per model, sorted by successful persuasion rate. Blue = successful shift (shift &gt; 0); orange = no attitude shift; red = negative shift ("backfire"). Successful rates range from 82.2% to 98.8% across all models. Data from the paper's Table 4 and Figure 5.</em></figcaption>
+          </figure>
+        </section>
+
+        <section id="mitigation" class="article__section animate-on-scroll">
+          <h2>8. Mitigating Persuasion Risks</h2>
+          <p>
+            To reduce manipulation risks, we propose a mitigation training pipeline combining supervised learning and reinforcement learning.
+          </p>
+          <h3>Dataset Construction</h3>
+          <p>
+            A dataset of <strong>9,566 human behavioral records</strong> was constructed and augmented with reasoning traces representing how humans resist persuasion.
+          </p>
+          <h3>Training Pipeline</h3>
+          <p>The mitigation approach includes two stages:</p>
+          <h4>Supervised Fine-Tuning (SFT)</h4>
+          <p>Teaches models to generate reasoning-based resistance to persuasion attempts.</p>
+          <h4>Reinforcement Learning (GRPO)</h4>
+          <p>Optimizes stance consistency and logical reasoning through reward-based learning.</p>
+          <p>The reward function encourages:</p>
+          <ul>
+            <li>Consistent stance maintenance</li>
+            <li>Logical argumentation</li>
+            <li>Correct reasoning format</li>
+          </ul>
+          <p>
+            This approach helps shift models from <strong>passive compliance toward active reasoning-based resistance</strong>.
+          </p>
+        </section>
+
+        <section id="discussion" class="article__section animate-on-scroll">
+          <h2>9. Discussion</h2>
+          <p>Our experiments highlight several important trends in frontier AI safety.</p>
+          <p>
+            First, <strong>reasoning models demonstrate higher risk in certain domains</strong>, particularly those requiring strategic planning.
+          </p>
+          <p>
+            Second, <strong>agentic AI systems introduce new safety challenges</strong> because they can interact with external tools and environments.
+          </p>
+          <p>
+            Third, <strong>persuasion capability appears to scale differently from general capability</strong>, suggesting that manipulation risk requires specialized evaluation.
+          </p>
+          <p>
+            These findings reinforce the importance of <strong>domain-specific safety benchmarks</strong> beyond traditional capability evaluations.
+          </p>
+        </section>
+
+        <section id="conclusion" class="article__section animate-on-scroll">
+          <h2>10. Conclusion</h2>
+          <p>
+            This report presents <strong>F1.5</strong>, an updated frontier AI risk management framework designed to evaluate and mitigate emerging risks associated with advanced language models.
+          </p>
+          <p>
+            Our experiments show that while current frontier models still struggle with complex autonomous tasks, they already exhibit concerning abilities in areas such as persuasion and vulnerability exploitation.
+          </p>
+          <p>To address these challenges, we introduce:</p>
+          <ul>
+            <li><strong>PACEbench</strong> for realistic cyber risk evaluation</li>
+            <li><strong>RvB adversarial defense framework</strong></li>
+            <li><strong>Training strategies for mitigating persuasion risks</strong></li>
+          </ul>
+          <p>
+            Together, these tools provide a foundation for <strong>continuous risk assessment and safer deployment of frontier AI systems</strong>.
+          </p>
+        </section>
+
+        <section id="citation" class="article__section animate-on-scroll">
+          <h2>Citation</h2>
+          <p>Citation information will be available with the full release of F1.5.</p>
+        </section>
+
+      </div>
+    </article>
+  </div>
+
+  <footer class="publications-footer">
+    <div class="publications-footer__inner">
+      <div class="publications-footer__top">
+        <a href="index.html" class="publications-footer__logo">SafeWork-F</a>
+        <nav class="publications-footer__nav" aria-label="Footer">
+          <a href="publications.html">Publications</a>
+          <a href="updates.html">Updates</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <p class="publications-footer__copy">Structured risk assessment for frontier AI systems. <span class="publications-footer__version">F1.5</span></p>
+    </div>
+  </footer>
+
+  <style>
+    .rvb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 640px) {
+      .rvb-grid { grid-template-columns: 1fr; }
+    }
+    .plotly-chart { width: 100%; min-height: 280px; }
+    #persuasion-chart { min-height: 360px; }
+    .article__caption {
+      font-size: 0.82em;
+      color: var(--color-muted, #6b7280);
+      margin-top: 0.5rem;
+    }
+  </style>
+  <script src="js/theme.js"></script>
+  <script src="js/home.js"></script>
+  <script>
+    (function () {
+      var btn = document.querySelector('.toc-toggle');
+      var layout = document.getElementById('page-layout');
+      if (btn && layout) {
+        btn.addEventListener('click', function () {
+          layout.classList.toggle('sidebar-closed');
+          var isClosed = layout.classList.contains('sidebar-closed');
+          btn.setAttribute('aria-expanded', isClosed ? 'false' : 'true');
+        });
+      }
+    })();
+  </script>
+  <script>
+    (function () {
+      var tocLinks = document.querySelectorAll('.toc__list a[href^="#"]');
+      var sections = [];
+      tocLinks.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        var section = id && document.getElementById(id);
+        if (section) sections.push({ link: a, section: section });
+      });
+      if (sections.length === 0) return;
+
+      var headerOffset = 120;
+      function setActive() {
+        var active = null;
+        var last = sections[sections.length - 1];
+
+        for (var i = 0; i < sections.length; i++) {
+          var rect = sections[i].section.getBoundingClientRect();
+          if (rect.top <= headerOffset) active = sections[i];
+        }
+        if (!active && sections.length) {
+          var lastRect = last.section.getBoundingClientRect();
+          if (lastRect.top < window.innerHeight) {
+            active = last;
+          } else {
+            active = sections[0];
+          }
+        }
+        sections.forEach(function (s) {
+          s.link.classList.toggle('is-active', s === active);
+        });
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(function () {
+            setActive();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      setActive();
+    })();
+  </script>
+  <script>
+  (function () {
+    var iters = ['Baseline', '1', '2', '3', '4', '5'];
+
+    // Palette inspired by OpenAI (teal) and Anthropic (warm terracotta) design systems
+    var C_TEAL      = '#10a37f'; // OpenAI green-teal — DSR line
+    var C_BAR       = '#b8cde0'; // soft periwinkle steel — ASC bars (elegant, low-contrast)
+    var C_SUCCESS   = '#10a37f'; // teal — successful persuasion
+    var C_NOSHIFT   = '#94a3b8'; // cool slate — neutral outcome
+    var C_NEGATIVE  = '#c25e40'; // warm terracotta (Anthropic-ish) — backfire
+
+    function fontColor() {
+      return document.documentElement.getAttribute('data-theme') === 'dark' ? '#c9d1d9' : '#374151';
+    }
+    function gridColor() {
+      return document.documentElement.getAttribute('data-theme') === 'dark' ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
+    }
+
+    var rvbData = [
+      { id: 'rvb-chart-1', title: '(a) Gemini-3.0-Flash',   asc: [5,5,5,7,7,7], dsr: [70,60,60,80,80,90] },
+      { id: 'rvb-chart-2', title: '(b) Gemini-3-Pro',       asc: [1,3,5,6,8,5], dsr: [50,50,70,70,90,90] },
+      { id: 'rvb-chart-3', title: '(c) GPT-5.2-2025-12-11', asc: [6,2,7,7,7,7], dsr: [60,18,40,60,60,60] },
+      { id: 'rvb-chart-4', title: '(d) Qwen3-max',          asc: [5,1,5,7,7,7], dsr: [40,40,50,60,60,60] }
+    ];
+
+    function renderRvB() {
+      var fc = fontColor(), gc = gridColor();
+      rvbData.forEach(function (d) {
+        var traces = [
+          {
+            x: iters, y: d.asc,
+            type: 'bar', name: 'Attack Success Count',
+            marker: { color: C_BAR, line: { color: 'rgba(0,0,0,0.08)', width: 1 } },
+            yaxis: 'y', showlegend: true, legendgroup: 'asc',
+            hovertemplate: 'Iter %{x}<br>ASC: %{y}<extra></extra>'
+          },
+          {
+            x: iters, y: d.dsr,
+            type: 'scatter', mode: 'lines+markers', name: 'Defense Success Rate (%)',
+            line: { color: C_TEAL, width: 2.5 },
+            marker: { symbol: 'circle', size: 7, color: C_TEAL,
+                      line: { color: '#fff', width: 1.5 } },
+            yaxis: 'y2', showlegend: true, legendgroup: 'dsr',
+            hovertemplate: 'Iter %{x}<br>DSR: %{y}%<extra></extra>'
+          }
+        ];
+        var layout = {
+          title: { text: d.title, font: { size: 13, color: fc, family: 'Inter, sans-serif' } },
+          paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+          font: { color: fc, family: 'Inter, sans-serif' },
+          margin: { t: 40, b: 70, l: 45, r: 55 },
+          legend: { orientation: 'h', x: 0, y: -0.32, font: { size: 11 } },
+          xaxis: { gridcolor: gc, tickfont: { size: 11 }, showline: true,
+                   linecolor: gc, title: { text: '' } },
+          yaxis: { title: 'ASC (#)', range: [0, 10], gridcolor: gc,
+                   tickfont: { size: 11 }, zeroline: false },
+          yaxis2: { title: 'DSR (%)', range: [0, 100], overlaying: 'y',
+                    side: 'right', tickfont: { size: 11 }, showgrid: false,
+                    ticksuffix: '%', zeroline: false }
+        };
+        Plotly.newPlot(d.id, traces, layout, { responsive: true, displayModeBar: false });
+      });
+    }
+
+    // Figure 5 — Persuasion stacked bar
+    // Successful rates from Table 4; no-shift/negative estimated from chart annotations in Figure 5.
+    var persuasionModels = [
+      'Gemini-3-Pro', 'Claude Sonnet 4.5<br>(Thinking)', 'GLM-4.7', 'Qwen3-Max',
+      'MiniMax-M2.1', 'Grok-4', 'Seed-OSS-36B', 'Kimi-K2-0905',
+      'GPT-5.2', 'Doubao-Seed-1-8'
+    ];
+    var successful = [98.8, 98.8, 97.1, 95.5, 95.3, 92.2, 90.7, 89.0, 82.6, 82.2];
+    var noShift    = [0.8,  0.8,  2.1,  3.5,  3.7,  4.7,  7.4,  6.9, 12.8, 17.6];
+    var negative   = [0.4,  0.4,  0.8,  1.0,  1.0,  3.1,  1.9,  4.1,  4.6,  0.2];
+
+    function renderPersuasion() {
+      var fc = fontColor(), gc = gridColor();
+      var traces = [
+        {
+          x: persuasionModels, y: successful,
+          type: 'bar', name: 'Successful Persuasion (shift > 0)',
+          marker: { color: C_SUCCESS },
+          hovertemplate: '%{x}<br>Successful: %{y}%<extra></extra>'
+        },
+        {
+          x: persuasionModels, y: noShift,
+          type: 'bar', name: 'No Attitude Shift',
+          marker: { color: C_NOSHIFT },
+          hovertemplate: '%{x}<br>No shift: %{y}%<extra></extra>'
+        },
+        {
+          x: persuasionModels, y: negative,
+          type: 'bar', name: 'Negative Shift (backfire)',
+          marker: { color: C_NEGATIVE },
+          hovertemplate: '%{x}<br>Negative: %{y}%<extra></extra>'
+        }
+      ];
+      var layout = {
+        barmode: 'stack',
+        paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+        font: { color: fc, family: 'Inter, sans-serif' },
+        margin: { t: 20, b: 90, l: 50, r: 20 },
+        legend: { orientation: 'h', x: 0, y: -0.32, font: { size: 11 } },
+        xaxis: { tickangle: -30, tickfont: { size: 11 }, gridcolor: gc,
+                 showline: true, linecolor: gc },
+        yaxis: { title: 'Percentage (%)', range: [0, 100], gridcolor: gc,
+                 ticksuffix: '%', zeroline: false }
+      };
+      Plotly.newPlot('persuasion-chart', traces, layout, { responsive: true, displayModeBar: false });
+    }
+
+    renderRvB();
+    renderPersuasion();
+
+    // Re-render on theme change to update font/grid colors
+    var observer = new MutationObserver(function () {
+      renderRvB();
+      renderPersuasion();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  })();
+  </script>
+</body>
+</html>

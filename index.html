@@ -10,6 +10,109 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/publications.css">
   <link rel="stylesheet" href="css/home.css">
+  <style>
+    /* Risk picker — two-column layout */
+    .risk-picker { margin-top:1rem; display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; align-items:start; }
+    @media (max-width:600px) { .risk-picker { grid-template-columns:1fr; } }
+
+    .risk-pills { display:flex; flex-direction:column; gap:0.35rem; }
+    .risk-pill {
+      display:flex; align-items:center; gap:0.55rem;
+      padding:0.55rem 0.85rem; border-radius:8px;
+      border:1.5px solid rgba(var(--rp-rgb),0.18); background:transparent;
+      font-size:0.8rem; font-weight:500; cursor:pointer; color:inherit; text-align:left;
+      transition:border-color 0.18s, background 0.18s, color 0.18s, transform 0.18s;
+      opacity:0; transform:translateX(-8px);
+    }
+    .risk-pills--visible .risk-pill {
+      animation:rpSlideIn 0.35s ease forwards;
+      animation-delay:calc(var(--i,0) * 45ms);
+    }
+    .risk-pill:hover { border-color:rgba(var(--rp-rgb),0.45); background:rgba(var(--rp-rgb),0.06); transform:translateX(2px); }
+    .risk-pill--active {
+      border-color:rgba(var(--rp-rgb),0.8); background:rgba(var(--rp-rgb),0.1);
+      color:rgba(var(--rp-rgb),1); transform:translateX(2px);
+    }
+    .risk-pill__icon { display:flex; flex-shrink:0; color:rgba(var(--rp-rgb),1); opacity:0.7; }
+    .risk-pill--active .risk-pill__icon { opacity:1; }
+    .risk-pill__num { font-size:0.62rem; font-weight:700; letter-spacing:0.06em; opacity:0.45; margin-left:auto; flex-shrink:0; }
+
+    /* Detail panel — right column, sticky */
+    .risk-panel {
+      position:sticky; top:80px;
+      padding:1.25rem 1.35rem; border-radius:10px;
+      border:1px solid var(--border,rgba(0,0,0,0.1));
+      background:var(--bg-subtle,rgba(0,0,0,0.02));
+    }
+    .risk-panel__inner { display:flex; flex-direction:column; gap:0.75rem; }
+    .risk-panel__icon-wrap {
+      width:40px; height:40px; border-radius:10px;
+      background:rgba(var(--rp-active-rgb),0.12); color:rgba(var(--rp-active-rgb),1);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .risk-panel__body { }
+    .risk-panel__num { font-size:0.65rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(var(--rp-active-rgb),1); margin-bottom:0.25rem; opacity:0.7; }
+    .risk-panel__title { font-size:1rem; font-weight:700; margin:0 0 0.5rem; line-height:1.3; }
+    .risk-panel__desc { font-size:0.85rem; line-height:1.6; color:var(--text-secondary,#64748b); margin:0; }
+
+    @keyframes rpSlideIn { to { opacity:1; transform:translateX(0); } }
+    @keyframes rpFadeUp { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+    .framework-diagram-wrap { width:100%; margin:1.75rem 0 2rem; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
+    .fwd { min-width:480px; padding:0 2px; }
+
+    /* Governance banner */
+    .fwd__gov { display:flex; align-items:center; gap:0.6rem; margin-bottom:0.85rem; }
+    .fwd__gov-line { flex:1; height:1px; background:linear-gradient(to right,rgba(99,102,241,0) 0%,rgba(99,102,241,0.45) 40%,rgba(99,102,241,0.45) 60%,rgba(99,102,241,0) 100%); }
+    .fwd__gov-pill { font-size:0.67rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#6366f1; padding:0.24rem 1rem; border:1.5px solid rgba(99,102,241,0.38); border-radius:2rem; background:rgba(99,102,241,0.07); white-space:nowrap; }
+    [data-theme="dark"] .fwd__gov-pill { background:rgba(99,102,241,0.14); }
+
+    /* Flow row */
+    .fwd__flow { display:flex; align-items:stretch; gap:0; flex-wrap:nowrap; }
+
+    /* Cards */
+    .fwd__card {
+      flex:1; position:relative; display:flex; flex-direction:column; align-items:center;
+      gap:0.45rem; padding:0.9rem 0.55rem 0.85rem; border-radius:10px; min-width:76px;
+      cursor:default; background:var(--fc-bg); border:1.5px solid var(--fc-border);
+      transition:transform 0.22s ease, box-shadow 0.22s ease;
+      opacity:0; transform:translateY(16px);
+    }
+    .fwd--active .fwd__card { animation:fwdUp 0.5s ease forwards; animation-delay:calc(var(--i,0) * 85ms); }
+    .fwd__card:hover { transform:translateY(-5px) !important; box-shadow:0 8px 22px var(--fc-glow); }
+
+    .fwd__card--teal   { --fc-bg:rgba(16,163,127,0.06);  --fc-border:rgba(16,163,127,0.25); --fc-glow:rgba(16,163,127,0.2); --fc-accent:#10a37f; }
+    .fwd__card--indigo { --fc-bg:rgba(99,102,241,0.06);  --fc-border:rgba(99,102,241,0.25); --fc-glow:rgba(99,102,241,0.2); --fc-accent:#6366f1; }
+    .fwd__card--amber  { --fc-bg:rgba(217,119,6,0.06);   --fc-border:rgba(217,119,6,0.28);  --fc-glow:rgba(217,119,6,0.2);  --fc-accent:#d97706; }
+    [data-theme="dark"] .fwd__card--teal   { --fc-bg:rgba(16,163,127,0.11);  }
+    [data-theme="dark"] .fwd__card--indigo { --fc-bg:rgba(99,102,241,0.11);  }
+    [data-theme="dark"] .fwd__card--amber  { --fc-bg:rgba(217,119,6,0.11);   }
+
+    .fwd__card-num { width:20px; height:20px; border-radius:50%; background:var(--fc-accent); color:#fff; font-size:0.64rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .fwd__card-icon { color:var(--fc-accent); display:flex; }
+    .fwd__card-title { font-size:0.68rem; font-weight:600; text-align:center; line-height:1.35; margin:0; }
+
+    /* Connectors */
+    .fwd__conn { flex-shrink:0; display:flex; align-items:center; padding:0 2px; opacity:0; }
+    .fwd--active .fwd__conn { animation:fwdFade 0.35s ease forwards; animation-delay:calc(var(--i,0) * 85ms + 42ms); }
+
+    /* Feedback row */
+    .fwd__feedback { display:flex; align-items:center; justify-content:center; gap:0.45rem; margin-top:0.65rem; opacity:0; }
+    .fwd--active .fwd__feedback { animation:fwdFade 0.45s ease 0.6s forwards; }
+    .fwd__feedback-dash { flex:1; max-width:130px; height:1.5px; background:repeating-linear-gradient(to right,rgba(194,94,64,0.7) 0,rgba(194,94,64,0.7) 5px,transparent 5px,transparent 10px); }
+    .fwd__feedback-pill { font-size:0.66rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#c25e40; padding:0.22rem 0.85rem; border:1.5px dashed rgba(194,94,64,0.42); border-radius:2rem; background:rgba(194,94,64,0.06); white-space:nowrap; }
+    [data-theme="dark"] .fwd__feedback-pill { background:rgba(194,94,64,0.13); }
+    .fwd__feedback-arr { font-size:0.72rem; color:rgba(194,94,64,0.7); line-height:1; }
+
+    /* Pulse ring on Monitoring card */
+    .fwd__pulse { position:absolute; top:7px; right:7px; width:7px; height:7px; border-radius:50%; background:#10a37f; }
+    .fwd__pulse::before { content:''; position:absolute; inset:-3px; border-radius:50%; border:1.5px solid #10a37f; animation:fwdPulse 2.2s ease-in-out infinite; }
+
+    @keyframes fwdUp   { to { opacity:1; transform:translateY(0); } }
+    @keyframes fwdFade { to { opacity:1; } }
+    @keyframes fwdPulse { 0%,100%{ transform:scale(1); opacity:0.7; } 55%{ transform:scale(1.7); opacity:0; } }
+  </style>
   <script>
     (function(){var r=document.documentElement;if(!r.getAttribute("data-theme")){r.setAttribute("data-theme",window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}})();
   </script>
@@ -64,6 +167,11 @@
     <section class="section">
       <div class="section__inner">
         <h2 class="section__title animate-on-scroll">Approach</h2>
+        <h3 class="approach-pillars-title animate-on-scroll">Risk Management Process</h3>
+        <p class="approach-taxonomy-intro animate-on-scroll">
+          The six-stage process that structures every risk assessment — from identifying potential threats to continuously monitoring residual risks.
+        </p>
+        <div id="framework-diagram" class="framework-diagram-wrap animate-on-scroll"></div>
         <h3 class="approach-taxonomy-title animate-on-scroll">Taxonomy</h3>
         <p class="approach-taxonomy-intro animate-on-scroll">
           We define four risk domains and construct evaluation in the following seven risk respects.
@@ -93,27 +201,76 @@
             </div>
           </div>
           <h4 class="taxonomy-block__heading">Seven risk respects (evaluation dimensions)</h4>
-          <ol class="taxonomy-respects">
-            <li><strong>Cyber offense</strong> — Capture-the-flag (CTF) and autonomous cyber attack</li>
-            <li><strong>Biological and chemical</strong> — Hazardous knowledge and reasoning; protocol diagnosis and troubleshooting</li>
-            <li><strong>Persuasion and manipulation</strong> — Inducing shifts in human or model opinions through dialogue</li>
-            <li><strong>Scheming</strong> — Dishonesty under pressure and sandbagging</li>
-            <li><strong>Uncontrolled AI R&amp;D</strong> — AI research and development outside intended control</li>
-            <li><strong>Self-replication</strong> — Capability and propensity for self-replication</li>
-            <li><strong>Multi-agent fraud</strong> — Collusion and fraud in social systems</li>
-          </ol>
+          <div class="risk-picker" id="risk-picker">
+            <div class="risk-pills" id="risk-pills">
+              <button class="risk-pill" style="--rp-rgb:239,68,68;--i:0" data-idx="0">
+                <span class="risk-pill__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></span>
+                Cyber offense
+                <span class="risk-pill__num">01</span>
+              </button>
+              <button class="risk-pill" style="--rp-rgb:16,185,129;--i:1" data-idx="1">
+                <span class="risk-pill__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31l-4.7 6.28A2 2 0 0 0 7 19h10a2 2 0 0 0 1.7-3.41L14 9.31V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/></svg></span>
+                Biological &amp; chemical
+                <span class="risk-pill__num">02</span>
+              </button>
+              <button class="risk-pill" style="--rp-rgb:139,92,246;--i:2" data-idx="2">
+                <span class="risk-pill__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                Persuasion &amp; manipulation
+                <span class="risk-pill__num">03</span>
+              </button>
+              <button class="risk-pill" style="--rp-rgb:245,158,11;--i:3" data-idx="3">
+                <span class="risk-pill__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="20.84" y1="4.61" x2="3.16" y2="19.39"/></svg></span>
+                Scheming
+                <span class="risk-pill__num">04</span>
+              </button>
+              <button class="risk-pill" style="--rp-rgb:59,130,246;--i:4" data-idx="4">
+                <span class="risk-pill__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></span>
+                Uncontrolled AI R&amp;D
+                <span class="risk-pill__num">05</span>
+              </button>
+              <button class="risk-pill" style="--rp-rgb:99,102,241;--i:5" data-idx="5">
+                <span class="risk-pill__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+                Self-replication
+                <span class="risk-pill__num">06</span>
+              </button>
+              <button class="risk-pill" style="--rp-rgb:16,163,127;--i:6" data-idx="6">
+                <span class="risk-pill__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                Multi-agent fraud
+                <span class="risk-pill__num">07</span>
+              </button>
+            </div>
+            <div class="risk-panel" id="risk-panel" style="--rp-active-rgb:239,68,68">
+              <div class="risk-panel__inner" id="risk-panel-inner">
+                <div class="risk-panel__icon-wrap" id="risk-panel-icon"></div>
+                <div class="risk-panel__body">
+                  <div class="risk-panel__num" id="risk-panel-num"></div>
+                  <div class="risk-panel__title" id="risk-panel-title"></div>
+                  <p class="risk-panel__desc" id="risk-panel-desc"></p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <h3 class="approach-pillars-title animate-on-scroll">Key pillars</h3>
         <ul class="approach-list">
-          <li class="approach-list__item animate-on-scroll" style="--i: 0">
+          <li class="approach-list__item animate-on-scroll" style="--i: 0; --pillar-rgb: 16,163,127">
+            <div class="approach-list__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            </div>
             <h4 class="approach-list__heading">Structured risk framework</h4>
             <p>Severity and likelihood scales, clear categories, and front-risk definitions so teams can assess and prioritize consistently.</p>
           </li>
-          <li class="approach-list__item animate-on-scroll" style="--i: 1">
+          <li class="approach-list__item animate-on-scroll" style="--i: 1; --pillar-rgb: 99,102,241">
+            <div class="approach-list__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4m-5 0h5"/></svg>
+            </div>
             <h4 class="approach-list__heading">Evidence-based evaluation</h4>
             <p>Red-teaming, benchmarks, and quantitative metrics to measure safety and alignment under adversarial and edge-case conditions.</p>
           </li>
-          <li class="approach-list__item animate-on-scroll" style="--i: 2">
+          <li class="approach-list__item animate-on-scroll" style="--i: 2; --pillar-rgb: 217,119,6">
+            <div class="approach-list__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
             <h4 class="approach-list__heading">Ongoing monitoring</h4>
             <p>Recommendations for periodic re-evaluation, versioned assessments, and tracking of high-leverage risk dimensions over time.</p>
           </li>
@@ -147,7 +304,7 @@
               <time class="updates-list__date" datetime="2026-02-08">February 8, 2026</time>
             </div>
             <p class="updates-list__desc">Incremental update: safety report with evaluation of more recent models and benchmarks. Builds on F1.0. Includes methodology, front-risk assessment, LLM evaluation table and charts (radar, scatter), and recommendations.</p>
-            <a href="report.html" class="link-arrow">View report</a>
+            <a href="blog_f1p5.html" class="link-arrow">View blog</a>
           </li>
           <li class="updates-list__item animate-on-scroll">
             <div class="updates-list__meta-row">
@@ -184,5 +341,159 @@
 
   <script src="js/theme.js"></script>
   <script src="js/home.js"></script>
+  <script>
+  /* Risk picker */
+  (function () {
+    var RISKS = [
+      { num:'01', rgb:'239,68,68',  title:'Cyber offense',             desc:'Capture-the-flag (CTF) and autonomous cyber attack — evaluating whether models can discover and exploit vulnerabilities with or without human direction.',
+        icon:'<polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>' },
+      { num:'02', rgb:'16,185,129', title:'Biological & chemical',      desc:'Hazardous knowledge elicitation and reasoning; protocol diagnosis and troubleshooting in biosecurity and chemical-risk contexts.',
+        icon:'<path d="M10 2v7.31l-4.7 6.28A2 2 0 0 0 7 19h10a2 2 0 0 0 1.7-3.41L14 9.31V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/>' },
+      { num:'03', rgb:'139,92,246', title:'Persuasion & manipulation',  desc:'Inducing shifts in human or model opinions through sustained dialogue — measuring how effectively models can change beliefs or behaviour.',
+        icon:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>' },
+      { num:'04', rgb:'245,158,11', title:'Scheming',                   desc:'Dishonesty under pressure and sandbagging — does the model conceal capabilities or misrepresent its reasoning when it perceives a reason to do so?',
+        icon:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="20.84" y1="4.61" x2="3.16" y2="19.39"/>' },
+      { num:'05', rgb:'59,130,246', title:'Uncontrolled AI R&D',        desc:'AI research and development operating outside intended control — evaluating whether models can meaningfully advance AI capabilities without human oversight.',
+        icon:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/>' },
+      { num:'06', rgb:'99,102,241', title:'Self-replication',           desc:'Capability and propensity for autonomous self-replication — can the model copy itself, acquire resources, and persist without authorisation?',
+        icon:'<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>' },
+      { num:'07', rgb:'16,163,127', title:'Multi-agent fraud',          desc:'Collusion and fraud in multi-agent social systems — whether groups of models can coordinate deceptive strategies that individual models cannot.',
+        icon:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>' },
+    ];
+
+    var pills    = document.getElementById('risk-pills');
+    var panel    = document.getElementById('risk-panel');
+    var panelInner = document.getElementById('risk-panel-inner');
+    var iconWrap = document.getElementById('risk-panel-icon');
+    var numEl    = document.getElementById('risk-panel-num');
+    var titleEl  = document.getElementById('risk-panel-title');
+    var descEl   = document.getElementById('risk-panel-desc');
+    if (!pills || !panel) return;
+
+    var current = 0;
+
+    function svgIcon(d, size) {
+      return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>';
+    }
+
+    function activate(idx) {
+      if (idx === current && pills.querySelector('.risk-pill--active')) return;
+      current = idx;
+      var r = RISKS[idx];
+
+      // Update pills
+      pills.querySelectorAll('.risk-pill').forEach(function (p, i) {
+        p.classList.toggle('risk-pill--active', i === idx);
+      });
+
+      // Animate panel out, swap content, animate in
+      panelInner.style.animation = 'none';
+      panelInner.style.opacity = '0';
+      panelInner.style.transform = 'translateY(5px)';
+
+      setTimeout(function () {
+        panel.style.setProperty('--rp-active-rgb', r.rgb);
+        iconWrap.innerHTML = svgIcon(r.icon, 18);
+        numEl.textContent = r.num;
+        titleEl.textContent = r.title;
+        descEl.innerHTML = r.desc;
+        panelInner.style.animation = 'rpFadeUp 0.22s ease forwards';
+      }, 80);
+    }
+
+    // Wire pills
+    pills.querySelectorAll('.risk-pill').forEach(function (pill, i) {
+      pill.addEventListener('mouseenter', function () { activate(i); });
+      pill.addEventListener('click',      function () { activate(i); });
+    });
+
+    // Scroll-in animation
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { pills.classList.add('risk-pills--visible'); activate(0); obs.disconnect(); }
+      });
+    }, { threshold: 0.2 });
+    obs.observe(pills);
+  })();
+
+  /* Risk domains: scroll-in animation */
+  (function () {
+    var domains = document.querySelector('.taxonomy-domains');
+    if (!domains) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { domains.classList.add('taxonomy-domains--visible'); obs.disconnect(); }
+      });
+    }, { threshold: 0.2 });
+    obs.observe(domains);
+  })();
+
+  (function () {
+    function icon(d) {
+      return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>';
+    }
+    var ICONS = [
+      icon('<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>'),
+      icon('<line x1="4" y1="6" x2="20" y2="6"/><circle cx="14" cy="6" r="3"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="8" cy="12" r="3"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="16" cy="18" r="3"/>'),
+      icon('<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'),
+      icon('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9,12 11,14 15,10"/>'),
+      icon('<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>'),
+    ];
+    var CONN = '<svg width="16" height="10" viewBox="0 0 16 10"><line x1="0" y1="5" x2="12" y2="5" stroke="#94a3b8" stroke-width="1.4"/><polyline points="8,1 13,5 8,9" fill="none" stroke="#94a3b8" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+
+    var nodes = [
+      { color:'teal',   num:1, title:'Risk Identification' },
+      { color:'indigo', num:2, title:'Risk Thresholds'     },
+      { color:'indigo', num:3, title:'Risk Analysis'       },
+      { color:'amber',  num:4, title:'Risk Evaluation'     },
+      { color:'teal',   num:5, title:'Continuous Monitoring', pulse:true },
+    ];
+
+    function build() {
+      var el = document.getElementById('framework-diagram');
+      if (!el) return;
+
+      var flow = nodes.map(function (n, i) {
+        var pulse = n.pulse ? '<div class="fwd__pulse"></div>' : '';
+        var card = '<div class="fwd__card fwd__card--' + n.color + '" style="--i:' + i + '">'
+          + pulse
+          + '<div class="fwd__card-num">' + n.num + '</div>'
+          + '<div class="fwd__card-icon">' + ICONS[i] + '</div>'
+          + '<div class="fwd__card-title">' + n.title + '</div>'
+          + '</div>';
+        var conn = (i < nodes.length - 1)
+          ? '<div class="fwd__conn" style="--i:' + (i + 0.5) + '">' + CONN + '</div>'
+          : '';
+        return card + conn;
+      }).join('');
+
+      el.innerHTML = '<div class="fwd" id="fwd-root">'
+        + '<div class="fwd__gov"><div class="fwd__gov-line"></div><span class="fwd__gov-pill">Risk Governance</span><div class="fwd__gov-line"></div></div>'
+        + '<div class="fwd__flow">' + flow + '</div>'
+        + '<div class="fwd__feedback">'
+        + '<span class="fwd__feedback-arr">&#8592;</span>'
+        + '<div class="fwd__feedback-dash"></div>'
+        + '<span class="fwd__feedback-pill">Risk Mitigation</span>'
+        + '<div class="fwd__feedback-dash"></div>'
+        + '<span class="fwd__feedback-arr">&#8592;</span>'
+        + '</div>'
+        + '</div>';
+
+      var root = document.getElementById('fwd-root');
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { root.classList.add('fwd--active'); obs.disconnect(); }
+        });
+      }, { threshold: 0.25 });
+      obs.observe(root);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', build);
+    } else {
+      build();
+    }
+  })();
+  </script>
 </body>
 </html>
