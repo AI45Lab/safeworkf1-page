@@ -736,3 +736,82 @@ body.home .site-header {
   font-weight: 500;
   color: var(--home-text);
 }
+
+/* ── Homepage publications list ─────────────────────────── */
+.home-pubs-list {
+  list-style: none;
+  margin: 2rem 0 2rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.home-pubs-list__item {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--home-border);
+}
+
+.home-pubs-list__item:first-child {
+  border-top: 1px solid var(--home-border);
+}
+
+.home-pubs-list__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.home-pubs-list__type {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--home-muted);
+  background: var(--home-border);
+  padding: 0.2em 0.55em;
+  border-radius: 4px;
+}
+
+.home-pubs-list__version {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #10a37f;
+  background: rgba(16,163,127,0.10);
+  padding: 0.2em 0.55em;
+  border-radius: 4px;
+}
+
+.home-pubs-list__date {
+  font-size: 0.8125rem;
+  color: var(--home-muted);
+  margin-left: auto;
+}
+
+.home-pubs-list__title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  line-height: 1.4;
+}
+
+.home-pubs-list__title a {
+  color: var(--home-text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.home-pubs-list__title a:hover {
+  color: #10a37f;
+}
+
+.home-pubs-list__desc {
+  font-size: 0.9rem;
+  color: var(--home-muted);
+  margin: 0;
+  line-height: 1.6;
+}
